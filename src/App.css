@@ -28,7 +28,7 @@ body {
     background-position: center center;
 }
 
-.player-card:nth-child(2) {
+.player-card:nth-child(3) {
     -moz-transform: scaleX(-1);
     -o-transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -54,7 +54,7 @@ button:hover {
 
 p {
     text-align: center;
-    min-height: 3.75rem;
+    min-height: 1.25rem;
 }
 
 p, button {

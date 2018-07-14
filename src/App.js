@@ -8,27 +8,52 @@ const PlayerCard = ({color, symbol}) => {
         backgroundImage: `url(./img/${symbol}.png`
     };
     return (
-        <div style={styles} className="player-card">
-            {symbol}
-        </div>
+        <div style={styles} className="player-card"/>
     )
 };
 
 class App extends Component {
-
     constructor(props) {
         super(props);
 
         this.symbols = ["rock", "paper", "scissors"];
 
-        this.state = {}
-    }
-
-    runGame = () => {
-        this.setState({
+        this.state = {
             playerRed: this.randomSymbol(),
             playerBlue: this.randomSymbol()
-        })
+        }
+    }
+
+    decideWinner = () => {
+        const {playerBlue, playerRed} = this.state;
+
+        if (playerBlue === playerRed) {
+            return "It's a draw!"
+        }
+        if ((playerBlue === "rock" && playerRed === "scissors") ||
+            (playerBlue === "paper" && playerRed === "rock") ||
+            (playerBlue === "scissors" && playerRed === "paper")) {
+            return "Blue player wins!"
+        }
+
+        return "Red player wins!"
+    };
+
+    runGame = () => {
+        let counter = 0;
+
+        const gameInterval = setInterval(() => {
+            counter++;
+            this.setState({
+                playerRed: this.randomSymbol(),
+                playerBlue: this.randomSymbol(),
+                winner: ""
+            });
+            if (counter > 10) {
+                clearInterval(gameInterval);
+                this.setState({winner: this.decideWinner()})
+            }
+        }, 150)
     };
 
     randomSymbol() {
@@ -39,8 +64,12 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <h2>Rock, Paper, Scissors!</h2>
                 <PlayerCard color="red" symbol={this.state.playerRed}/>
                 <PlayerCard color="blue" symbol={this.state.playerBlue}/>
+                {this.state.winner &&
+                <p>{this.state.winner}</p>
+                }
                 <button onClick={this.runGame}>Run Game</button>
             </div>
         );
