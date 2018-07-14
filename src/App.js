@@ -12,7 +12,7 @@ const PlayerCard = ({color, symbol, winner}) => {
         opacity: winner === color || winner === "" ? 1 : .35
     };
     return (
-        <div style={styles} className="m-3 shadow rounded-circle border border-dark player-card"/>
+        <div style={styles} className="mx-auto my-3 shadow rounded-circle border border-dark player-card"/>
     )
 };
 
@@ -37,9 +37,9 @@ class App extends Component {
                 <Card className="mx-auto">
                     <CardBody className="shadow-lg">
                         <CardTitle className="border-bottom">
-                            <h1>Rock, Paper, Scissors</h1>
+                            <h1 className="font-weight-bold">Rock, Paper, Scissors</h1>
                         </CardTitle>
-                        <Row className="mx-3 my-2">
+                        <Row className="mx-3">
                             <PlayerCard color="Green" symbol={playerGreen} winner={winner}/>
                             <PlayerCard color="Red" symbol={playerRed} winner={winner}/>
                         </Row>
